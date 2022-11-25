@@ -6,30 +6,29 @@ conn = psycopg2.connect(
    password="continuousimpliesintegrable"
 )
 
-def read_dict(C):
+def read_dict(connection):
     #reads the dictionary from the database
-    cur = C.cursor()
+    cur = connection.cursor()
     cur.execute("SELECT id, word, translation FROM dictionary;")
     rows = cur.fetchall()
     cur.close()
     return rows
-def add_word(C, word, translation):
-    #adds a word to the dictionary
-    cur = C.cursor()
+def add_word(connection, word, translation):
+    cur = connection.cursor()
     cur.execute(f"INSERT INTO dictionary (word, translation) VALUES ('{word}', '{translation}');")
     cur.close()
-def delete_word(C, ID):
+def delete_word(connection, ID):
     #deletes a word from the dictionary
-    cur = C.cursor()
+    cur = connection.cursor()
     cur.execute(f"DELETE FROM dictionary WHERE id = '{ID}';")
     cur.close()
-def save_dict(C):
+def save_dict(connection):
     #commits all changes to the database
-    cur = C.cursor()
+    cur = connection.cursor()
     cur.execute("COMMIT;")
     cur.close()
 
-def insert_word(C, word, translation):
+def insert_word(connection, word, translation):
     #inserts a word into the database
     print('word inserted into database')
 

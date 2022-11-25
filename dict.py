@@ -25,6 +25,9 @@ def save_dict(C):
     cur.execute("COMMIT;")
     cur.close()
 
+def insert_word(C, word, translation):
+    print('word inserted into database')
+
 print("""Welcome to the dictionary program!
 Available commands are list, add, delete and quit""")
 while True: ## REPL - Read Execute Program Loop

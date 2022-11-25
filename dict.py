@@ -7,25 +7,30 @@ conn = psycopg2.connect(
 )
 
 def read_dict(C):
+    #reads the dictionary from the database
     cur = C.cursor()
     cur.execute("SELECT id, word, translation FROM dictionary;")
     rows = cur.fetchall()
     cur.close()
     return rows
 def add_word(C, word, translation):
+    #adds a word to the dictionary
     cur = C.cursor()
     cur.execute(f"INSERT INTO dictionary (word, translation) VALUES ('{word}', '{translation}');")
     cur.close()
 def delete_word(C, ID):
+    #deletes a word from the dictionary
     cur = C.cursor()
     cur.execute(f"DELETE FROM dictionary WHERE id = '{ID}';")
     cur.close()
 def save_dict(C):
+    #commits all changes to the database
     cur = C.cursor()
     cur.execute("COMMIT;")
     cur.close()
 
 def insert_word(C, word, translation):
+    #inserts a word into the database
     print('word inserted into database')
 
 print("""Welcome to the dictionary program!
